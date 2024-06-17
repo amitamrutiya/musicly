@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:musicly/page/home_screen.dart';
+import 'package:musicly/constant/dimensions.dart';
 import 'package:musicly/page/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>
   onDoneLoading() async {
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => const LoginScreen(),
+        pageBuilder: (context, animation1, animation2) => LoginScreen(),
         transitionDuration: const Duration(milliseconds: 800),
         transitionsBuilder: (context, animation, animation2, child) {
           return FadeTransition(
@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Text(
                   'Musicly',
                   style: TextStyle(
-                    fontSize: 50.0,
+                    fontSize: Dimensions.font26 * 2,
                     fontWeight: FontWeight.bold,
                     foreground: Paint()
                       ..shader = const LinearGradient(
