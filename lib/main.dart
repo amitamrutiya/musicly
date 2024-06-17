@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(backgroundColor: Color(0xff2C2C54), body: SplashScreen()),
+      home: Scaffold(body: SplashScreen()),
     );
   }
 }
