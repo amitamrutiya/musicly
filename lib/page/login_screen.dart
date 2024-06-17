@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:musicly/components/big_text.dart';
 import 'package:musicly/constant/app_colors.dart';
 import 'package:musicly/constant/dimensions.dart';
+import 'package:musicly/constant/image_string.dart';
 import 'package:musicly/controller/auth_controller.dart';
 import 'package:musicly/page/home_screen.dart';
 
@@ -58,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                         Center(
                           child: Image(
                               image: const AssetImage(
-                                  'assets/images/login_screen.png'),
+                                  ImageString.login_screen_image),
                               height: Dimensions.screenHeight * 0.3),
                         ),
                         SizedBox(height: Dimensions.height45),
@@ -85,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                                         Dimensions.radius30))),
                             icon: const Image(
                                 image:
-                                    AssetImage('assets/images/google_logo.png'),
+                                    AssetImage(ImageString.google_logo_image),
                                 width: 20.0),
                             onPressed: () async {
                               await authController

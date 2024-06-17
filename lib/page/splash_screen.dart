@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:musicly/constant/dimensions.dart';
+import 'package:musicly/constant/image_string.dart';
 import 'package:musicly/page/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -75,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Lottie.asset(
-                "assets/animation/animation.json",
+                ImageString.splash_animation,
               ),
               FadeTransition(
                 opacity: _animation!,
