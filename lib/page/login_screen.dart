@@ -32,9 +32,7 @@ class LoginScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasData) {
-            return HomeScreen(
-              title: snapshot.data!.displayName ?? "hi there",
-            );
+            return HomeScreen(title: "Hi, ${snapshot.data!.displayName} 👋");
           } else {
             return Container(
               decoration: const BoxDecoration(
@@ -47,106 +45,100 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  body: SingleChildScrollView(
-                      child: Container(
-                    padding: const EdgeInsets.all(30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: Dimensions.height30 * 2),
-                        Center(
-                          child: Image(
-                              image: const AssetImage(
-                                  ImageString.login_screen_image),
-                              height: Dimensions.screenHeight * 0.3),
-                        ),
-                        SizedBox(height: Dimensions.height45),
-                        SizedBox(height: Dimensions.height10),
-                        BigText(
-                          text: "Login",
-                          size: Dimensions.font20 * 2,
-                          color: Colors.white,
-                        ),
-                        SizedBox(height: Dimensions.height10),
-                        BigText(
-                          text: "Login with Your Google Account",
-                          size: Dimensions.font20,
-                          color: Colors.white70,
-                        ),
-                        SizedBox(height: Dimensions.height30),
-                        SizedBox(
-                          width: double.infinity,
-                          child: OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.radius30))),
-                            icon: const Image(
-                                image:
-                                    AssetImage(ImageString.google_logo_image),
-                                width: 20.0),
-                            onPressed: () async {
-                              await authController
-                                  .googleLogin(context)
-                                  .then((_) {
-                                if (authController.hasError == true) {
-                                  Get.closeAllSnackbars();
-                                  Get.snackbar(
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: Dimensions.height30 * 2),
+                      Center(
+                        child: Image(
+                            image: const AssetImage(
+                                ImageString.login_screen_image),
+                            height: Dimensions.screenHeight * 0.3),
+                      ),
+                      SizedBox(height: Dimensions.height45),
+                      SizedBox(height: Dimensions.height10),
+                      BigText(
+                        text: "Login",
+                        size: Dimensions.font20 * 2,
+                        color: Colors.white,
+                      ),
+                      SizedBox(height: Dimensions.height10),
+                      BigText(
+                        text: "Login with Your Google Account",
+                        size: Dimensions.font20,
+                        color: Colors.white70,
+                      ),
+                      SizedBox(height: Dimensions.height30),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius30))),
+                          icon: const Image(
+                              image: AssetImage(ImageString.google_logo_image),
+                              width: 20.0),
+                          onPressed: () async {
+                            await authController.googleLogin(context).then((_) {
+                              if (authController.hasError == true) {
+                                Get.closeAllSnackbars();
+                                Get.snackbar("Answer",
+                                    authController.errorCode!.value.toString(),
+                                    icon: Icon(
+                                      Icons.dangerous_rounded,
+                                      size: Dimensions.iconSize16 * 2,
+                                    ),
+                                    titleText: Text(
                                       "Answer",
-                                      authController.errorCode!.value
-                                          .toString(),
-                                      icon: Icon(
-                                        Icons.dangerous_rounded,
-                                        size: Dimensions.iconSize16 * 2,
-                                      ),
-                                      titleText: Text(
-                                        "Answer",
-                                        style: TextStyle(
-                                            fontSize: Dimensions.font20,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily:
-                                                'assets/fonts/SourceSansPro-Bold'),
-                                      ),
-                                      messageText: Text(
-                                        "Please Selecte Any One Option",
-                                        style: TextStyle(
-                                            fontSize: Dimensions.font16),
-                                      ),
-                                      backgroundColor: Colors.red,
-                                      backgroundGradient: const LinearGradient(
-                                          colors: [
-                                            Color(0xffED6F9E),
-                                            Color(0xffEC8B6A)
-                                          ]));
-                                }
-                              });
-                            },
-                            label: const Text(
-                              "Log In With Google",
-                              style: TextStyle(fontSize: 16),
-                            ),
+                                      style: TextStyle(
+                                          fontSize: Dimensions.font20,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily:
+                                              'assets/fonts/SourceSansPro-Bold'),
+                                    ),
+                                    messageText: Text(
+                                      "Please Selecte Any One Option",
+                                      style: TextStyle(
+                                          fontSize: Dimensions.font16),
+                                    ),
+                                    backgroundColor: Colors.red,
+                                    backgroundGradient: const LinearGradient(
+                                        colors: [
+                                          Color(0xffED6F9E),
+                                          Color(0xffEC8B6A)
+                                        ]));
+                              }
+                            });
+                          },
+                          label: const Text(
+                            "Log In With Google",
+                            style: TextStyle(fontSize: 16),
                           ),
                         ),
-                        Center(
-                          child: TextButton(
-                              onPressed: () {
-                                Get.off(
-                                    () => const HomeScreen(
-                                          title: "hi there",
-                                        ),
-                                    transition: Transition.fadeIn);
-                              },
-                              child: const Text(
-                                "Continue Without Sign In",
-                                style: TextStyle(color: Colors.white70),
-                              )),
-                        )
-                      ],
-                    ),
-                  ))),
+                      ),
+                      Center(
+                        child: TextButton(
+                            onPressed: () {
+                              Get.off(
+                                  () => const HomeScreen(
+                                        title: "Welcom to Musicly",
+                                      ),
+                                  transition: Transition.fadeIn);
+                            },
+                            child: const Text(
+                              "Continue Without Sign In",
+                              style: TextStyle(color: Colors.white70),
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             );
           }
         });
