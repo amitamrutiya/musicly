@@ -27,6 +27,7 @@ class BigText extends StatelessWidget {
         fontSize: size == 0 ? Dimensions.font20 : size,
         fontWeight: fontWeight ?? FontWeight.bold,
         fontFamily: 'Lora',
+        decoration: TextDecoration.none,
       ),
       softWrap: true,
     );
