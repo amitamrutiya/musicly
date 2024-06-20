@@ -13,6 +13,7 @@ class AuthController extends GetxController {
   RxString? get errorCode => _errorCode;
   final RxBool _hasError = false.obs;
   RxBool? get hasError => _hasError;
+  User? get user => FirebaseAuth.instance.currentUser;
 
   Future googleLogin(BuildContext context) async {
     final googleSignIn = GoogleSignIn();
