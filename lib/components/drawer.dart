@@ -34,7 +34,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               )),
           Container(
             padding: const EdgeInsets.all(10),
-            child: BigText(
+            child: const BigText(
               text: "Select Your Favorite Singers",
             ),
           ),

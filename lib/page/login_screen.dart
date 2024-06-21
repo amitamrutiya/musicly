@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                   backgroundColor: AppColors.primaryDarkColor),
             );
           } else if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: BigText(
                 text: "Something Went Wrong",
                 size: 30,
@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                               width: 20.0),
                           onPressed: () async {
                             await authController.googleLogin(context).then((_) {
-                              if (authController.hasError == true) {
+                              if (authController.hasError!.value) {
                                 Get.closeAllSnackbars();
                                 Get.snackbar("Answer",
                                     authController.errorCode!.value.toString(),

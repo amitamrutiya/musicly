@@ -1,12 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:musicly/constant/dimensions.dart';
-
-import '../main.dart';
+import 'package:musicly/components/error_snackbar.dart';
+import 'package:musicly/main.dart';
 
 class AuthController extends GetxController {
   RxString? _errorCode;
@@ -17,28 +18,11 @@ class AuthController extends GetxController {
 
   Future googleLogin(BuildContext context) async {
     final googleSignIn = GoogleSignIn();
-    if (ConnectivityResult.none == await Connectivity().checkConnectivity()) {
-      Get.closeAllSnackbars();
-      Get.snackbar("Attention", "Please Turn On Your Internet",
-          icon: Icon(
-            Icons.dangerous_rounded,
-            size: Dimensions.iconSize16 * 2,
-          ),
-          titleText: Text(
-            "Attention",
-            style: TextStyle(
-                fontSize: Dimensions.font20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'assets/fonts/SourceSansPro-Bold'),
-          ),
-          messageText: Text(
-            "Please Turn On Your Internet",
-            style: TextStyle(fontSize: Dimensions.font16),
-          ),
-          backgroundColor: Colors.red,
-          backgroundGradient: const LinearGradient(
-              colors: [Color(0xffED6F9E), Color(0xffEC8B6A)]));
-
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      showErrorSnackBar(
+          title: "Attention", message: "Please Turn On Your Internet");
       return;
     }
     showDialog(

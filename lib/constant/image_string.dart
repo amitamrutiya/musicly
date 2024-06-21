@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class ImageString {
   static const String splash_animation = 'assets/animation/animation.json';
   static const String google_logo_image = 'assets/images/google_logo.png';

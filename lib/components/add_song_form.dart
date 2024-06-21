@@ -39,23 +39,12 @@ class _AddSongFormState extends State<AddSongForm> {
     super.dispose();
   }
 
-  final bool _isLoading = false;
   List<String> _selectedSingers = [];
 
   final _formSongKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference signers =
-        FirebaseFirestore.instance.collection('signers');
-    Future<void> getSigners() async {
-      await signers.get().then((value) {
-        for (var element in value.docs) {
-          print(element.data());
-        }
-      });
-    }
-
     return Form(
       key: _formSongKey,
       child: Column(
@@ -151,10 +140,10 @@ class _AddSongFormState extends State<AddSongForm> {
           submitButton(
             title: "Add Song",
             onPressed: () async {
-              if (ConnectivityResult.none !=
-                  await Connectivity().checkConnectivity()) {
+              final List<ConnectivityResult> connectivityResult =
+                  await (Connectivity().checkConnectivity());
+              if (connectivityResult.contains(ConnectivityResult.none)) {
                 final isValid = _formSongKey.currentState!.validate();
-                FocusScope.of(context).unfocus();
                 if (isValid) {
                   _formSongKey.currentState!.save();
 
@@ -188,7 +177,6 @@ class _AddSongFormState extends State<AddSongForm> {
     for (var author in _selectedSingers) {
       final authorData =
           FirebaseFirestore.instance.collection("singers").doc(author);
-      print(authorData.get());
       updateFutures.add(authorData.update({
         "songs": FieldValue.arrayUnion([enterSong.toJson()])
       }));
@@ -201,7 +189,6 @@ class _AddSongFormState extends State<AddSongForm> {
         "Song Added Successfully",
       );
     } catch (error) {
-      print(error.toString());
       showErrorSnackBar(title: error.toString(), message: "Failed to add song");
     }
   }

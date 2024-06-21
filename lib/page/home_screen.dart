@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:musicly/components/big_text.dart';
 import 'package:musicly/components/bottom_model_sheet.dart';
 import 'package:musicly/components/drawer.dart';
-import 'package:musicly/constant/dimensions.dart';
 import 'package:musicly/controller/auth_controller.dart';
 import 'package:musicly/controller/singer_controller.dart';
 import 'package:musicly/model/song_model.dart';

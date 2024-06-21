@@ -23,7 +23,6 @@ class _AddSingerFormState extends State<AddSingerForm> {
   var singerDescriptionController = TextEditingController();
 
   final _formSingerKey = GlobalKey<FormState>();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -102,19 +101,16 @@ class _AddSingerFormState extends State<AddSingerForm> {
           submitButton(
             title: "Add Singer",
             onPressed: () async {
-              if (ConnectivityResult.none !=
-                  await Connectivity().checkConnectivity()) {
+              final List<ConnectivityResult> connectivityResult =
+                  await (Connectivity().checkConnectivity());
+              if (connectivityResult.contains(ConnectivityResult.none)) {
                 final isValid = _formSingerKey.currentState!.validate();
-                // FocusScope.of(context).unfocus();
 
                 if (isValid) {
                   _formSingerKey.currentState!.save();
 
-                  _isLoading = true;
-
                   await handleAddSinger();
 
-                  _isLoading = false;
                   singerNameController.clear();
                   singerImageUrlContoller.clear();
                   singerDescriptionController.clear();
